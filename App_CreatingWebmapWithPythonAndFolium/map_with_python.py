@@ -2,8 +2,9 @@ import folium
 import pandas as pd
 
 
-map = folium.Map(location = [48.7767982,-121.8109970], zoom_start = 6) #tiles='stamentoner')
-fg = folium.FeatureGroup('My_test_map')
+map = folium.Map(location = [48.7767982,-121.8109970], zoom_start = 6,tiles='Mapbox bright')
+
+fgv = folium.FeatureGroup('Volcanoes')
 
 data = pd.read_csv('Volcanoes_USA.txt')
 #name = list(data['NAME'])
@@ -22,7 +23,16 @@ def color_producer(elv):
 
 for lt,lg,el in zip(lat,lon,elv):
     #print(lt,lg,n)
-    fg.add_child(folium.CircleMarker(location=[lt, lg],radius=5,fill_opacity=1, popup=str(el),fill=True, color=color_producer(el)))
+    fgv.add_child(folium.CircleMarker(location=[lt, lg],radius=5,fill_opacity=1,
+    popup=str(el),fill=True, color=color_producer(el)))
 
-map.add_child(fg)
+fgp = folium.FeatureGroup('Population')
+data_file = open('world.json',encoding='utf-8-sig')
+fgp.add_child(folium.GeoJson(data=data_file.read(),
+style_function=lambda x: {'fillColor': 'green' if x['properties']['POP2005']<10000000 else 'red'} ))
+
+
+map.add_child(fgv)
+map.add_child(fgp)
+map.add_child(folium.LayerControl())
 map.save('My_test_map.html')
