@@ -2,7 +2,7 @@ import folium
 import pandas as pd
 
 
-map = folium.Map(location = [48.7767982,-121.8109970], zoom_start = 6,tiles='Mapbox bright')
+map = folium.Map(location = [48.7767982,-122.8109970], zoom_start = 6,tiles='Mapbox bright')
 
 fgv = folium.FeatureGroup('Volcanoes')
 
