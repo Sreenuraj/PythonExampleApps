@@ -18,6 +18,14 @@ def table_select(con,cur,table_name):
     row = cur.execute("SELECT * FROM "+table_name)
     print(row.fetchall())
 
+def table_delete(con,cur,table_name,id):
+    cur.execute("DELETE FROM "+table_name+" WHERE ID=?", (id,))
+    con.commit
+
+def table_update(con,cur,table_name,item,id):
+    cur.execute("UPDATE "+table_name+" SET Item=? WHERE ID=?", (item, id))
+    con.commit
+
 def connection_close(con,cur):
     con.close()
 
@@ -26,5 +34,8 @@ table_name = create_table(con,cur,'shop')
 table_insert(con,cur,table_name,1,'bread',23.5)
 table_insert(con,cur,table_name,2,'butter',20.5)
 table_insert(con,cur,table_name,3,'jam',28.5)
+table_select(con,cur,table_name)
+table_delete(con,cur,table_name,3)
+table_update(con,cur,table_name,'egg',3)
 table_select(con,cur,table_name)
 connection_close(con,cur)

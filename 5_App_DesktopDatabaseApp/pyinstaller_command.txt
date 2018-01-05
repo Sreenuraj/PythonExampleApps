@@ -1,0 +1,9 @@
+# To have only the executable but when the app runs the cmd/terminal will appear
+
+pyinstaller --onefile filename.py
+
+#To have only executable
+pyinstaller --onefile --window filename.py
+
+#To have dependable
+pyinstaller filename.py
