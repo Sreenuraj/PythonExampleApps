@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['frontend.py'],
-             pathex=['/Sreenu/PythonExampleApps/5_App_DesktopDatabaseApp'],
+             pathex=['/Users/sreenurajvarma/PythonExampleApps/5_App_DesktopDatabaseApp'],
              binaries=[],
              datas=[],
              hiddenimports=[],
