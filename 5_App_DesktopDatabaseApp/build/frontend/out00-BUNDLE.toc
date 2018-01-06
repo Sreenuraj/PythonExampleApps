@@ -1,3 +1,0 @@
-([('frontend',
-   '/Users/sreenurajvarma/PythonExampleApps/5_App_DesktopDatabaseApp/dist/frontend',
-   'EXECUTABLE')],)

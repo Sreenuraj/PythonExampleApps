@@ -1,3 +1,6 @@
+help
+pyinstaller -h
+
 # To have only the executable but when the app runs the cmd/terminal will appear
 
 pyinstaller --onefile filename.py
