@@ -36,7 +36,7 @@ while True:
     (_,cnts,_) = cv2.findContours(threshold_delta_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for contour in cnts:
-        if cv2.contourArea(contour) < 100000:
+        if cv2.contourArea(contour) < 1000:
             continue
         status = 1
         (x,y,width,height) = cv2.boundingRect(contour)
@@ -58,7 +58,7 @@ while True:
     # Check if the user input is 'q' to break and come out of loop
     if key == ord('q'):
         break
-
+print(df)
 print(status_list)
 print(times)
 
