@@ -1,6 +1,6 @@
 import cv2
 
-# create a video capture object
+# create a video capture object, 0 means the default camera
 video = cv2.VideoCapture(0)
 
 # In a while loop, loop through frame which is return by video.read() method
