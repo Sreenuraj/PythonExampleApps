@@ -35,6 +35,7 @@ while True:
     #find the contours
     (_,cnts,_) = cv2.findContours(threshold_delta_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+    # Checking if pixel is greater than a threshold value
     for contour in cnts:
         if cv2.contourArea(contour) < 1000:
             continue
@@ -43,10 +44,12 @@ while True:
         cv2.rectangle(frame, (x, y), (x+width,y+height), (0,255,0), 3)
     status_list.append(status)
 
+    # Adding the time when there is a motion detected
     if status_list[-1]==1 and status_list[-2]==0:
         times.append(datetime.now())
     if status_list[-1]==0 and status_list[-2]==1:
         times.append(datetime.now())
+        
     # Showing the image
     cv2.imshow('Gray', gray)
     cv2.imshow('Delta', delta_frame)
@@ -57,13 +60,17 @@ while True:
     key = cv2.waitKey(1)
     # Check if the user input is 'q' to break and come out of loop
     if key == ord('q'):
+        times.append(datetime.now())
         break
-print(df)
-print(status_list)
+#print(df)
+#print(status_list)
 print(times)
 
 for i in range(0,len(times),2):
-    df = df.append({"Start":times[i],"End":times[i+1]}, ignore_index=True)
+    if i+1 >= len(times):
+        df = df.append({"Start":times[i],"End":times[i]}, ignore_index=True)
+    else:
+        df = df.append({"Start":times[i],"End":times[i+1]}, ignore_index=True)
 
 df.to_csv('Times.csv')
 # Releasing the video
